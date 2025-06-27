@@ -38,7 +38,7 @@ export const useQueryState = <T extends string[]>(
         return newValues;
       });
     },
-    [key, setSearchParams],
+    [searchParams, key, setSearchParams],
   );
 
   return [state, updateState] as const;

@@ -1,11 +1,11 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useQueryState } from '@/hooks/use-search-params-state';
-import { entities, type Proof } from '@/lib/game-data';
+import { useProofs } from '@/hooks/use-proofs';
+import { entities } from '@/lib/game-data';
 import { useNavigate, useParams } from 'react-router';
 
 export const EntityPage = () => {
-  const [selectedProofs] = useQueryState<Proof[]>({ key: 'proofs' });
+  const { selectedProofs, bannedProofs } = useProofs();
   const navigate = useNavigate();
   const { name } = useParams();
   const entity = entities.find((e) => e.name == name);
@@ -15,7 +15,7 @@ export const EntityPage = () => {
   }
 
   return (
-    <Card className='w-[400px] max-h-full h-fit'>
+    <Card className='w-[400px] max-h-full h-fit ml-8'>
       <CardHeader>
         <CardTitle className='flex gap-4 text-xl font-semibold items-center'>
           <div className='rounded-md bg-primary border size-12' />
@@ -27,7 +27,11 @@ export const EntityPage = () => {
           <div className='flex flex-wrap items-center justify-center gap-2'>
             {entity.proofs.map((p) => (
               <Badge
-                variant={selectedProofs.includes(p) ? 'primary' : 'default'}
+                variant={selectedProofs.includes(p)
+                  ? 'primary'
+                  : bannedProofs.includes(p)
+                  ? 'destructive'
+                  : 'default'}
               >
                 {p}
               </Badge>
