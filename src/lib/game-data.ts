@@ -9,11 +9,21 @@ export const proofs = [
 ] as const;
 export type Proof = typeof proofs[number];
 
+export const huntSpeeds = [
+  'Lente',
+  'Normale',
+  'Rapide',
+  'Variable',
+] as const;
+type HuntSpeed = typeof huntSpeeds[number];
+
 export type Entity = {
   name: string;
   proofs: Proof[];
   hint: string;
   specifications: string[];
+  healthBeforeHunt: number;
+  huntSpeed: HuntSpeed;
 };
 
 export const entities: Entity[] = [
@@ -25,6 +35,8 @@ export const entities: Entity[] = [
       'Santé mentale max. avant chasse : normale, 50%',
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Esprit',
@@ -36,6 +48,8 @@ export const entities: Entity[] = [
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
       'Efficacité de l’encens hors chasse : 180 secondes (valeur normale : 90 secondes)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Fantome',
@@ -51,6 +65,8 @@ export const entities: Entity[] = [
       ' Rayon de perte de santé mentale (quand visible avec ligne de vue dégagée) : 10m',
       ' Taux de perte de santé mentale (quand visible avec ligne de vue dégagée) : -0.5% par seconde',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Poltergeist',
@@ -64,6 +80,8 @@ export const entities: Entity[] = [
 
       'Chances de lancer puissant : 20%',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Banshee',
@@ -75,6 +93,8 @@ export const entities: Entity[] = [
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
       'Baisse supplémentaire de santé mentale de sa cible sur une Apparition chantante (si sa cible touche la Banshee) : 5%',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Djinn',
@@ -87,6 +107,8 @@ export const entities: Entity[] = [
       'Vitesse en chasse (Pas de joueur visible / Joueur visible à moins de 3 mètres / Disjoncteur éteint ou cassé) : normale, 1.7 ~ 2.8',
       'Perte de santé mentale perdue à l’activation du drain de santé mentale : 25% (tous les joueurs à moins de 3 mètres OU dans la même pièce)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Cauchemar',
@@ -95,11 +117,13 @@ export const entities: Entity[] = [
     hint:
       'A une probabilité d’éteindre immédiatement un interrupteur que le joueur vient d’allumer. Privilégie les apparitions qui cassent les ampoules. Peut chasser plus tôt que la normale si la pièce où il se trouve est éteinte. Chasse plus tard que la normale si la pièce où il se trouve est allumée.',
     specifications: [
-      ' Santé mentale max. avant chasse (lumière éteinte) : anticipée, 60%',
+      'Santé mentale max. avant chasse (lumière éteinte) : anticipée, 60%',
 
       'Santé mentale max. avant chasse (lumière allumée) : tardive, 40%',
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
     ],
+    healthBeforeHunt: 60,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Revenant',
@@ -116,6 +140,8 @@ export const entities: Entity[] = [
       'Vitesse de poursuite (vitesse fixe en chasse quand joueur repéré) : 3.0',
       'Réduction de vitesse lorsqu’aucun joueur n’est visible (*) : -0.75 chaque seconde (minimum 1m/s)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Ombre',
@@ -131,6 +157,8 @@ export const entities: Entity[] = [
       'Chances de lancer d’objet – aucun joueur dans la même pièce : normale',
       'Chances de lancer d’objet – au moins un joueur dans la même pièce : 0%',
     ],
+    healthBeforeHunt: 35,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Démon',
@@ -146,6 +174,8 @@ export const entities: Entity[] = [
       'Durée d’attente entre les chasses : 20 secondes (valeur normale : 25 secondes)',
       'Portée du crucifix : 1.5x la valeur normale de la portée normale du crucifix',
     ],
+    healthBeforeHunt: 100,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Yurei',
@@ -158,6 +188,8 @@ export const entities: Entity[] = [
       'Durée de blocage dans sa pièce si utilisation d’un encens : 90s',
       'Perte de santé mentale à l’utilisation du pouvoir : 15%',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Oni',
@@ -171,6 +203,8 @@ export const entities: Entity[] = [
       'Niveau d’activité (minimum 2 joueurs à 3 mètres ou moins) : Doublé',
       'Durée de visibilité maximale (en chasse) : 0.5s (valeur normale : 0.3s)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Yokai',
@@ -184,6 +218,8 @@ export const entities: Entity[] = [
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
       'Distance d’écoute en chasse (objets électroniques) : 2.5 mètres (au lieu de 7 pour toutes les autres entités)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Goryo',
@@ -194,6 +230,8 @@ export const entities: Entity[] = [
       'Santé mentale max. avant chasse : normale, 50%',
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Hantu',
@@ -204,11 +242,11 @@ export const entities: Entity[] = [
       'Santé mentale max. avant chasse : normale, 50%',
       ' Vitesse fixe en chasse (22 – 15°C) : 1.4',
       'Vitesse fixe en chasse (15 – 12°C) : 1.75',
-
       'Vitesse fixe en chasse (6 – 3°C) : 2.4',
-
       'Vitesse fixe en chasse (0 – -10°C) : 2.7',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Myling',
@@ -221,6 +259,8 @@ export const entities: Entity[] = [
       'Distance des pas audibles en chasse : 12m (valeur normale : 20m)',
       'Volume des bruits de pas en chasse : plus faible que la normale (ex. à 6m : 50% au lieu de 70%)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Onryo',
@@ -231,6 +271,8 @@ export const entities: Entity[] = [
       'Santé mentale max. avant chasse : anticipé, 60%',
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
     ],
+    healthBeforeHunt: 60,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Les jumeaux',
@@ -247,6 +289,8 @@ export const entities: Entity[] = [
 
       'Probabilité de double interaction (principale PUIS secondaire) : 20%',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Raiju',
@@ -258,6 +302,8 @@ export const entities: Entity[] = [
       'Santé mentale max. avant chasse (objet électronique à proximité) : 65%',
       'Vitesse fixe en chasse (objet électronique à proximité) : 2.5',
     ],
+    healthBeforeHunt: 60,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Obake',
@@ -270,6 +316,8 @@ export const entities: Entity[] = [
       'Chances de laisser une empreinte spéciale : 16.67% (1 sur 6)',
       'Chance d’effectuer une transformation : 6.66% à chaque clignotement (au minimum 1 fois par chasse)',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Normale',
   },
   {
     name: 'Mimic',
@@ -281,6 +329,8 @@ export const entities: Entity[] = [
       'Vitesse en chasse : normale, 1.7 ~ 2.8 (note : le Mimic copiera les caractéristiques de vitesse de l’entité imitée)',
       'Santé mentale max. avant chasse : normale, 50% (note : le Mimic copiera les caractéristiques de chasse de l’entité imitée)',
     ],
+    healthBeforeHunt: 100,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Moroi',
@@ -294,6 +344,8 @@ export const entities: Entity[] = [
       'Vitesse entre 29 – 25% : 1.832 ~ 3.025',
       'Vitesse entre 4 – 0% : 2.250 ~ 3.700',
     ],
+    healthBeforeHunt: 50,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Deogen',
@@ -307,6 +359,8 @@ export const entities: Entity[] = [
       'Probabilité de réponse essoufflement (Spirit Box) : 33%',
       'Durée de visibilité minimale (en chasse) : 0.2s (valeur normale : 0.08s)',
     ],
+    healthBeforeHunt: 40,
+    huntSpeed: 'Variable',
   },
   {
     name: 'Thayé',
@@ -318,5 +372,7 @@ export const entities: Entity[] = [
       'Vitesse fixe en chasse : 2.75',
       'Perte de capacité par niveau de vieillissement : 6% (minimum atteint à 10 niveaux de vieillissement : 15%)',
     ],
+    healthBeforeHunt: 75,
+    huntSpeed: 'Rapide',
   },
 ] as const;

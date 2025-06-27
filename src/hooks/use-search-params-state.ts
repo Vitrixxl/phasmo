@@ -21,7 +21,7 @@ export const useQueryState = <T extends string[]>(
     setState(
       urlValues.length > 0 ? urlValues : defaultValue || [] as unknown as T,
     );
-  }, [searchParams, key, defaultValue]);
+  }, [searchParams, key]);
 
   const updateState = useCallback(
     (values: string[] | ((prev: string[]) => string[])) => {

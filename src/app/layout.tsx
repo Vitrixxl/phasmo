@@ -3,11 +3,23 @@ import { entities, type Proof } from '@/lib/game-data';
 import { Outlet } from 'react-router';
 import { Filters } from './_components/filters';
 import { useProofs } from '@/hooks/use-proofs';
+import { useQueryState } from '@/hooks/use-search-params-state';
 
 export const AppLayout = () => {
   const { bannedProofs, selectedProofs } = useProofs();
-  const isPossible = (entityProofs: Proof[], entityName: string) => {
+  const [health] = useQueryState({ key: 'health' });
+  const [huntSpeeds] = useQueryState({ key: 'huntspeeds' });
+  const isPossible = (
+    entityProofs: Proof[],
+    entityHealth: number,
+    entityHuntSpeed: string,
+    entityName: string,
+  ) => {
     let possible = true;
+    if (Number(health[0]) > entityHealth) possible = false;
+    if (huntSpeeds.length > 0 && !huntSpeeds.includes(entityHuntSpeed)) {
+      possible = false;
+    }
     for (const p of selectedProofs) {
       if (!entityProofs.includes(p)) possible = false;
     }
@@ -25,14 +37,19 @@ export const AppLayout = () => {
   return (
     <div className='h-svh bg-background dark p-12 gap-8 grid grid-rows-[auto_minmax(0,1fr)] w-full min-w-0'>
       <Filters />
-      <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full'>
+      <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full relative'>
         <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal'>
           {entities.map((e, i) => (
             <EntityCard
               key={i}
               entity={e}
               selectedProofs={selectedProofs}
-              possible={isPossible(e.proofs, e.name)}
+              possible={isPossible(
+                e.proofs,
+                e.healthBeforeHunt,
+                e.huntSpeed,
+                e.name,
+              )}
             />
           ))}
         </div>
