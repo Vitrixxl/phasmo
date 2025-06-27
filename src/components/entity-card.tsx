@@ -1,10 +1,9 @@
 import { type Entity, type Proof } from '@/lib/game-data';
 import { LucideCheck } from 'lucide-react';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
 import { useProofs } from '@/hooks/use-proofs';
-import { Button } from './ui/button';
 
 type EntityCardProps = {
   entity: Entity;
