@@ -1,72 +1,61 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { EntityCard } from '@/components/entity-card';
+import { entities, type Proof } from '@/lib/game-data';
+import { Outlet } from 'react-router';
+import { Filters } from './_components/filters';
 import { useProofs } from '@/hooks/use-proofs';
-import { proofs } from '@/lib/game-data';
-export const Filters = () => {
-  const { toggleProof, bannedProofs, selectedProofs } = useProofs();
+import { useQueryState } from '@/hooks/use-search-params-state';
+
+export const AppLayout = () => {
+  const { bannedProofs, selectedProofs } = useProofs();
+  const [health] = useQueryState({ key: 'health' });
+  const [huntSpeeds] = useQueryState({ key: 'huntspeeds' });
+  const isPossible = (
+    entityProofs: Proof[],
+    entityHealth: number,
+    entityHuntSpeed: string,
+    entityName: string,
+  ) => {
+    let possible = true;
+    if (Number(health[0]) > entityHealth) possible = false;
+    if (huntSpeeds.length > 0 && !huntSpeeds.includes(entityHuntSpeed)) {
+      possible = false;
+    }
+    for (const p of selectedProofs) {
+      if (!entityProofs.includes(p)) possible = false;
+    }
+    for (const p of bannedProofs) {
+      console.log(possible);
+      if (entityProofs.includes(p)) possible = false;
+    }
+    if (
+      entityName == 'Mimic' && selectedProofs.includes('Orbe fantomatique') &&
+      !selectedProofs.includes('D.O.T.S.')
+    ) {
+      console.log(possible);
+      return true;
+    }
+    return possible;
+  };
   return (
-    <div className='flex gap-8  min-h-0 h-max'>
-      <div className='border rounded-lg bg-card relative size-32 p-2'>
-        <div className='relative'>
-          <img
-            src='phasmo.jpg'
-            className='rounded-lg absolute inset-0'
-          />
+    <div className='h-svh bg-background dark p-12 gap-8 grid grid-rows-[auto_minmax(0,1fr)] w-full min-w-0'>
+      <Filters />
+      <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full relative'>
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal'>
+          {entities.map((e, i) => (
+            <EntityCard
+              key={i}
+              entity={e}
+              selectedProofs={selectedProofs}
+              possible={isPossible(
+                e.proofs,
+                e.healthBeforeHunt,
+                e.huntSpeed,
+                e.name,
+              )}
+            />
+          ))}
         </div>
-      </div>
-      <Card className='gap-2 flex-1 h-full'>
-        <CardHeader className=''>
-          <CardTitle className=''>Preuves de base</CardTitle>
-        </CardHeader>
-        <CardContent className='pt-0'>
-          <div className='grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] auto-rows-min gap-4'>
-            {proofs.map((p, i) => {
-              return (
-                <Button
-                  key={i}
-                  className=''
-                  // size='lg'
-                  variant={selectedProofs.includes(p)
-                    ? 'primary'
-                    : bannedProofs.includes(p)
-                    ? 'destructive'
-                    : 'default'}
-                  onClick={() => toggleProof(p)}
-                >
-                  {p}
-                </Button>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
-      <div className='flex flex-wrap gap-2 flex-1'>
-        <Card className='gap-2 w-fit h-fit'>
-          <CardHeader>
-            <CardTitle>Santé mental avant chasse</CardTitle>
-          </CardHeader>
-          <CardContent className='flex gap-2'>
-            <div className='flex gap-2'>
-              <Button>50%</Button>
-              <Button>75%</Button>
-              <Button>100%</Button>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className='gap-2 w-fit h-fit'>
-          <CardHeader>
-            <CardTitle>Vitesse en chasse</CardTitle>
-          </CardHeader>
-          <CardContent className='flex gap-2'>
-            <div className='flex gap-2'>
-              <Button>1.7 ~ 2.8 m/s</Button>
-              <Button>1.0 m/s</Button>
-              <Button>2.5 m/s</Button>
-              <Button>3.0 m/s</Button>
-              <Button>Variable</Button>
-            </div>
-          </CardContent>
-        </Card>
+        <Outlet />
       </div>
     </div>
   );
