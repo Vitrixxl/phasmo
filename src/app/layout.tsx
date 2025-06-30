@@ -38,10 +38,10 @@ export const AppLayout = () => {
     return possible;
   };
   return (
-    <div className='h-svh bg-background dark p-12 gap-8 grid grid-rows-[auto_minmax(0,1fr)] w-full min-w-0'>
+    <div className='h-svh bg-background dark p-12 gap-7 grid grid-rows-[auto_minmax(0,1fr)] w-full min-w-0'>
       <Filters />
       <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full relative'>
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal'>
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal pt-1'>
           {entities.map((e, i) => (
             <EntityCard
               key={i}

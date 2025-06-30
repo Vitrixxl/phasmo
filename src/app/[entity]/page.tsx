@@ -20,7 +20,7 @@ export const EntityPage = () => {
   return (
     width > 1024
       ? (
-        <Card className='absolute xl:relative w-[400px] max-h-full h-fit ml-8 right-0 top-0'>
+        <Card className='absolute xl:relative w-[450px] max-h-full h-fit ml-8 right-0 top-0 mt-1'>
           <CardHeader>
             <CardTitle className='flex gap-4 text-xl font-semibold items-center'>
               <div className='rounded-md bg-primary border size-12' />
@@ -32,6 +32,7 @@ export const EntityPage = () => {
               <div className='flex flex-wrap items-center justify-center gap-2'>
                 {entity.proofs.map((p) => (
                   <Badge
+                    className='text-sm'
                     variant={selectedProofs.includes(p)
                       ? 'primary'
                       : bannedProofs.includes(p)
@@ -43,11 +44,11 @@ export const EntityPage = () => {
                 ))}
               </div>
             </div>
-            <p className='text-muted-foreground text-sm'>{entity.hint}</p>
-            <p className='font-semibold text-sm text-foreground'>
+            <p className='text-muted-foreground '>{entity.hint}</p>
+            <p className='font-semibold  text-foreground'>
               Données caractéristiques :
             </p>
-            <ul className='list-disc pl-4 space-y-4 text-sm'>
+            <ul className='list-disc pl-4 space-y-4'>
               {entity.specifications.map((sp) => (
                 <li className='text-muted-foreground'>{sp}</li>
               ))}
