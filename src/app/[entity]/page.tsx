@@ -46,7 +46,7 @@ export const EntityPage = () => {
         </p>
         <ul className=' space-y-4'>
           {entity.specifications.map((sp) => (
-            <li className='text-muted-foreground flex gap-1'>
+            <li className='text-muted-foreground flex gap-2'>
               <LucideGhost className='size-4 mt-1' />
               <span className='flex-1'>{sp}</span>
             </li>
