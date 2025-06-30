@@ -19,15 +19,7 @@ export const Filters = () => {
   });
 
   return (
-    <div className='flex gap-4  min-h-0 '>
-      <div className='border rounded-lg bg-card relative size-32 p-2'>
-        <div className='relative'>
-          <img
-            src='phasmo.jpg'
-            className='rounded-lg absolute inset-0'
-          />
-        </div>
-      </div>
+    <div className='flex gap-4  min-h-0 h-fit'>
       <Card className='gap-2 flex-1 h-full'>
         <CardHeader className=''>
           <CardTitle className=''>Preuves de base</CardTitle>
