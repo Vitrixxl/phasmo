@@ -9,7 +9,7 @@ export const Filters = () => {
   const { toggleProof, bannedProofs, selectedProofs } = useProofs();
   const [health, setHealth] = useQueryState({
     key: 'health',
-    defaultValue: ['50'],
+    defaultValue: ['0'],
   });
   const [localHealth, setLocalHealth] = useState(
     health[0] ? Number([health[0]]) : 50,
@@ -21,9 +21,6 @@ export const Filters = () => {
   return (
     <div className='flex gap-4  min-h-0 h-fit'>
       <Card className='gap-2 flex-1 h-full'>
-        <CardHeader className=''>
-          <CardTitle className=''>Preuves de base</CardTitle>
-        </CardHeader>
         <CardContent className='pt-0'>
           <div className='grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] auto-rows-min gap-4'>
             {proofs.map((p, i) => {

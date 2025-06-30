@@ -1,5 +1,4 @@
 import { EntityCard } from '@/components/entity-card';
-import { AnimatePresence } from 'motion/react';
 import { entities, type Proof } from '@/lib/game-data';
 import { Outlet } from 'react-router';
 import { Filters } from './_components/filters';
@@ -41,29 +40,27 @@ export const AppLayout = () => {
   };
 
   return (
-    <AnimatePresence mode='wait'>
-      <div className='h-svh bg-background dark p-6 pb-0 gap-5 grid grid-rows-[auto_auto_minmax(0,1fr)] w-full min-w-0 overflow-hidden'>
-        <Navbar />
-        <Filters />
-        <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full relative max-h-full overflow-hidden min-h-0'>
-          <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal pt-1 pb-6'>
-            {entities.map((e, i) => (
-              <EntityCard
-                key={i}
-                entity={e}
-                selectedProofs={selectedProofs}
-                possible={isPossible(
-                  e.proofs,
-                  e.healthBeforeHunt,
-                  e.huntSpeed,
-                  e.name,
-                )}
-              />
-            ))}
-          </div>
-          <Outlet />
+    <div className='h-svh bg-background dark p-6 pb-0 gap-5 grid grid-rows-[auto_auto_minmax(0,1fr)] w-full min-w-0 overflow-hidden'>
+      <Navbar />
+      <Filters />
+      <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full relative max-h-full overflow-hidden min-h-0'>
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal pt-1 pb-6'>
+          {entities.map((e, i) => (
+            <EntityCard
+              key={i}
+              entity={e}
+              selectedProofs={selectedProofs}
+              possible={isPossible(
+                e.proofs,
+                e.healthBeforeHunt,
+                e.huntSpeed,
+                e.name,
+              )}
+            />
+          ))}
         </div>
+        <Outlet />
       </div>
-    </AnimatePresence>
+    </div>
   );
 };

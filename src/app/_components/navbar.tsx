@@ -40,7 +40,7 @@ export const Navbar = () => {
             </Link>
           </Button>
         ))}
-        <Input className='ml-4' placeholder='Rechercher...' />
+        <Input className='ml-4' placeholder=' Rechercher...' />
       </div>
       <div className='flex gap-4 ml-auto'>
         <Button size='icon'>

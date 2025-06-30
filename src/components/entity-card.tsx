@@ -41,7 +41,7 @@ export const EntityCard = (
         </p>
       </div>
       <div className='w-full border-t' />
-      <div className='flex flex-wrap gap-2 h-full'>
+      <div className='flex flex-wrap gap-2 h-fit'>
         {entity.proofs.map((p, i) => (
           <Badge
             className='h-fit'

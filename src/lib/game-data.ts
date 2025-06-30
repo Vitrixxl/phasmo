@@ -10,9 +10,7 @@ export const proofs = [
 export type Proof = typeof proofs[number];
 
 export const huntSpeeds = [
-  'Lente',
   'Normale',
-  'Rapide',
   'Variable',
 ] as const;
 type HuntSpeed = typeof huntSpeeds[number];
@@ -373,6 +371,6 @@ export const entities: Entity[] = [
       'Perte de capacité par niveau de vieillissement : 6% (minimum atteint à 10 niveaux de vieillissement : 15%)',
     ],
     healthBeforeHunt: 75,
-    huntSpeed: 'Rapide',
+    huntSpeed: 'Variable',
   },
 ] as const;
