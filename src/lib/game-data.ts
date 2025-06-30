@@ -2,8 +2,8 @@ export const proofs = [
   'EMF 5',
   'Spirit box',
   'Temperature glaciale',
-  'Ecriture fantomatique',
   'D.O.T.S.',
+  'Ecriture fantomatique',
   'Orbe fantomatique',
   'Empreinte U.V.',
 ] as const;
@@ -374,3 +374,68 @@ export const entities: Entity[] = [
     huntSpeed: 'Variable',
   },
 ] as const;
+
+type Equipement = {
+  name: string;
+  description: string;
+  type: 'tool' | 'cursed';
+  rateLabels: string[];
+  tiers: string[][];
+  img: string;
+  proof?: Proof;
+
+  relatedEntities: Entity[];
+};
+export const equipements: Equipement[] = [
+  {
+    name: 'Lampe de poche',
+    description:
+      'La lampe de poche est un objet permettant de vous éclairer sur le lieu d’enquête. Les meilleures lampes torche permettent d’encore mieux s’éclairer.',
+    rateLabels: ['Luminosité'],
+    tiers: [],
+    type: 'tool',
+    img:
+      'https://www.phasmophobia-fr.com/wp-content/uploads/2021/08/Lampe-puissante-2.0-1024x576.png',
+    proof: 'Empreinte U.V.',
+    relatedEntities: entities.map((e) =>
+      (e.proofs.includes('Empreinte U.V.') && e) || null
+    ).filter((n) => n != null),
+  },
+
+  {
+    name: 'Spirit Box',
+    description:
+      'La Spirit Box est une radio qui permet à l’entité de répondre à certaines questions en activant une radio. Les meilleures Spirit Box ont une bien meilleure portée et la réponse est généralement plus claire.',
+    rateLabels: ['Qualité', 'Probabilité de réponse'],
+    type: 'tool',
+    tiers: [
+      [
+        'Absence de réponse : Diode rouge',
+        'Présence de réponse : Diode blanche accompagnée de bruits de radio',
+        'La qualité de réponse est faible et la probabilité de réponse également.',
+        'Tant que vous avez cet équipement uniquement, il est assez difficile d’obtenir une réponse dans les pièces les plus larges.',
+        'La stratégie la plus fiable est d’attendre une apparition, puis placez-vous proche de l’endroit où entité a fini son apparition. Demandez ensuite à l’entité la question qui vous intéresse. ',
+        'Etant proche de l’entité, vous optimiserez vos chances d’avoir une réponse.',
+      ],
+      [
+        'Temps de chargement des empreintes : 5s',
+        'Le bâton lumineux permet d’avoir une lumière de zone permettant de révéler des empreintes proches.',
+        'Il est nécessaire une fois par minute de le secouer afin de restaurer son pouvoir éclairant.',
+        'Il vous faudra rester à côté des empreintes un certain temps afin de les charger suffisamment en lumière pour les prendre en photo.',
+      ],
+      [
+        'Temps de chargement des empreintes : 1,5s.',
+        'Objet électronique. Attire l’entité en chasse si tenu allumé proche.',
+        'La lampe pro permet d’avoir un large cône de lumière UV qui révèle très rapidement les empreintes.',
+        'Il ne faut qu’un instant pour suffisamment charger les empreintes pour les prendre en photo.',
+        'Sa luminosité est suffisante pour remplacer partiellement une lampe torche classique sur les maps les moins grandes, cependant vous ne pourrez pas l’utiliser en tant que lampe mains-libres comme une lampe torche.',
+      ],
+    ],
+    img:
+      'https://www.phasmophobia-fr.com/wp-content/uploads/2021/08/Lampe-UV-2.0.png',
+    proof: 'Spirit box',
+    relatedEntities: entities.map((e) =>
+      (e.proofs.includes('Spirit box') && e) || null
+    ).filter((n) => n != null),
+  },
+];

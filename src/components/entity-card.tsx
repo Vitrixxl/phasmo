@@ -25,13 +25,14 @@ export const EntityCard = (
     <div
       onClick={(e) => {
         e.stopPropagation();
+        console.log('navigateion');
         navigate(entity.name + '?' + searchParams.toString());
       }}
       className={cn(
         'p-4 bg-card border rounded-lg flex flex-col gap-4 transition-colors relative',
         !possible && 'opacity-40',
         name == entity.name && 'border-border-focused',
-        isDitched && 'border-destructive ring-destructive/50 ring-2 opacity-40',
+        isDitched && 'border-destructive ring-destructive/50 ring-0 opacity-40',
       )}
     >
       <div className='flex gap-4 items-center'>

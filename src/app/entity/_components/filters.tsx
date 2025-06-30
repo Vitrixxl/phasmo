@@ -19,10 +19,10 @@ export const Filters = () => {
   });
 
   return (
-    <div className='flex gap-4  min-h-0 h-fit'>
-      <Card className='gap-2 flex-1 h-full'>
+    <div className='flex gap-4  min-h-0 h-max'>
+      <Card className='gap-2  h-max max-w-[550px]'>
         <CardContent className='pt-0'>
-          <div className='grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] auto-rows-min gap-4'>
+          <div className='flex flex-wrap auto-rows-min gap-4'>
             {proofs.map((p, i) => {
               return (
                 <Button
@@ -62,29 +62,25 @@ export const Filters = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className='gap-2 w-fit h-fit'>
-          <CardHeader>
-            <CardTitle>Vitesse en chasse</CardTitle>
-          </CardHeader>
-          <CardContent className='flex gap-2'>
-            <div className='flex gap-2'>
-              {huntSpeeds.map((hs, i) => (
-                <Button
-                  key={i}
-                  variant={queryHuntSpeeds.includes(hs) ? 'primary' : 'default'}
-                  onClick={() =>
-                    setQueryHuntSpeeds((qhs) =>
-                      qhs.includes(hs)
-                        ? qhs.filter((qhs) => qhs != hs)
-                        : [...qhs, hs]
-                    )}
-                >
-                  {hs}
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className='bg-card border rounded-xl p-4 flex items-center  w-fit h-fit  gap-4'>
+          <CardTitle>Vitesse en chasse</CardTitle>
+          <div className='flex gap-2'>
+            {huntSpeeds.map((hs, i) => (
+              <Button
+                key={i}
+                variant={queryHuntSpeeds.includes(hs) ? 'primary' : 'default'}
+                onClick={() =>
+                  setQueryHuntSpeeds((qhs) =>
+                    qhs.includes(hs)
+                      ? qhs.filter((qhs) => qhs != hs)
+                      : [...qhs, hs]
+                  )}
+              >
+                {hs}
+              </Button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
