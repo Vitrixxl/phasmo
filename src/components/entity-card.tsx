@@ -4,6 +4,8 @@ import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
 import { useProofs } from '@/hooks/use-proofs';
 import { useState } from 'react';
+import { Button } from './ui/button';
+import { LucideX } from 'lucide-react';
 
 type EntityCardProps = {
   entity: Entity;
@@ -21,16 +23,12 @@ export const EntityCard = (
   const { name } = useParams();
   return (
     <div
-      onContextMenu={(e) => {
-        e.preventDefault();
-        setIsDitched((prev) => !prev);
-      }}
       onClick={(e) => {
         e.stopPropagation();
         navigate(entity.name + '?' + searchParams.toString());
       }}
       className={cn(
-        'p-4 bg-card border rounded-lg flex flex-col gap-4 transition-colors',
+        'p-4 bg-card border rounded-lg flex flex-col gap-4 transition-colors relative',
         !possible && 'opacity-40',
         name == entity.name && 'border-border-focused',
         isDitched && 'border-destructive ring-destructive/50 ring-2 opacity-40',
@@ -58,6 +56,20 @@ export const EntityCard = (
           </Badge>
         ))}
       </div>
+      <Button
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsDitched((prev) => !prev);
+        }}
+        variant='destructive'
+        className={cn(
+          'bg-transparent! border-none hover:bg-destructive/50!  hover:text-foreground! ml-auto absolute top-2 right-2',
+          isDitched && 'bg-destructive/50!',
+        )}
+        size='icon'
+      >
+        <LucideX />
+      </Button>
     </div>
   );
 };
