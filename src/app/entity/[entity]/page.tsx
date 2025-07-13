@@ -67,11 +67,6 @@ export const EntityPage = () => {
       </CardHeader>
       <CardContent className='space-y-4 max-h-full overflow-auto'>
         <p className='text-muted-foreground '>{entity.hint}</p>
-        <p className='text-muted-foreground '>{entity.hint}</p>
-        <p className='text-muted-foreground '>{entity.hint}</p>
-        <p className='text-muted-foreground '>{entity.hint}</p>
-        <p className='text-muted-foreground '>{entity.hint}</p>
-        <p className='text-muted-foreground '>{entity.hint}</p>
         <p className='font-semibold  text-foreground'>
           Données caractéristiques :
         </p>

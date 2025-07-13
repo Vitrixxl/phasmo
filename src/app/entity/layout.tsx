@@ -32,17 +32,17 @@ export const EntityLayout = () => {
       continue;
     }
 
-    if (selectedProofs.some((p) => !e.proofs.includes(p))) {
-      sortedEntities.impossible.push(e);
-      continue;
-    }
-
     if (
-      e.name === 'Mimic' &&
+      e.name == 'Mimic' &&
       selectedProofs.includes('Orbe fantomatique') &&
       !selectedProofs.includes('D.O.T.S.')
     ) {
       sortedEntities.possible.push(e);
+      continue;
+    }
+
+    if (selectedProofs.some((p) => !e.proofs.includes(p))) {
+      sortedEntities.impossible.push(e);
       continue;
     }
 
