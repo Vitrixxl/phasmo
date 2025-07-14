@@ -156,7 +156,7 @@ export const entities: Entity[] = [
       'Chances de lancer d’objet – au moins un joueur dans la même pièce : 0%',
     ],
     healthBeforeHunt: 35,
-    huntSpeed: 'Variable',
+    huntSpeed: 'Normale',
   },
   {
     name: 'Démon',
@@ -173,7 +173,7 @@ export const entities: Entity[] = [
       'Portée du crucifix : 1.5x la valeur normale de la portée normale du crucifix',
     ],
     healthBeforeHunt: 100,
-    huntSpeed: 'Variable',
+    huntSpeed: 'Normale',
   },
   {
     name: 'Yurei',
