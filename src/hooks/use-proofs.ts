@@ -9,12 +9,12 @@ export const useProofs = () => {
     if (proofs.selected.includes(proof)) {
       setProofs((prev) => ({
         banned: [...prev.banned, proof],
-        selected: prev.selected.filter((p) => p == proof),
+        selected: prev.selected.filter((p) => p != proof),
       }));
     } else if (proofs.banned.includes(proof)) {
       setProofs((prev) => ({
         ...prev,
-        banned: prev.banned.filter((p) => p == proof),
+        banned: prev.banned.filter((p) => p != proof),
       }));
     } else {
       setProofs((prev) => ({
