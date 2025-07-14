@@ -22,6 +22,7 @@ export type Entity = {
   specifications: string[];
   healthBeforeHunt: number;
   huntSpeed: HuntSpeed;
+  drains: boolean;
 };
 
 export const entities: Entity[] = [
@@ -35,6 +36,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Esprit',
@@ -48,6 +50,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Fantome',
@@ -65,6 +68,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: true,
   },
   {
     name: 'Poltergeist',
@@ -80,6 +84,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: true,
   },
   {
     name: 'Banshee',
@@ -93,6 +98,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: true,
   },
   {
     name: 'Djinn',
@@ -107,6 +113,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Variable',
+    drains: true,
   },
   {
     name: 'Cauchemar',
@@ -122,6 +129,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 60,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Revenant',
@@ -140,6 +148,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Variable',
+    drains: false,
   },
   {
     name: 'Ombre',
@@ -157,6 +166,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 35,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Démon',
@@ -174,6 +184,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 100,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Yurei',
@@ -188,6 +199,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: true,
   },
   {
     name: 'Oni',
@@ -203,6 +215,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: true,
   },
   {
     name: 'Yokai',
@@ -216,8 +229,9 @@ export const entities: Entity[] = [
       'Vitesse en chasse : normale, 1.7 ~ 2.8',
       'Distance d’écoute en chasse (objets électroniques) : 2.5 mètres (au lieu de 7 pour toutes les autres entités)',
     ],
-    healthBeforeHunt: 50,
+    healthBeforeHunt: 80,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Goryo',
@@ -230,6 +244,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Hantu',
@@ -245,6 +260,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Variable',
+    drains: false,
   },
   {
     name: 'Myling',
@@ -259,6 +275,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Onryo',
@@ -271,6 +288,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 60,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Les jumeaux',
@@ -289,6 +307,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Variable',
+    drains: false,
   },
   {
     name: 'Raiju',
@@ -300,8 +319,9 @@ export const entities: Entity[] = [
       'Santé mentale max. avant chasse (objet électronique à proximité) : 65%',
       'Vitesse fixe en chasse (objet électronique à proximité) : 2.5',
     ],
-    healthBeforeHunt: 60,
+    healthBeforeHunt: 65,
     huntSpeed: 'Variable',
+    drains: false,
   },
   {
     name: 'Obake',
@@ -316,6 +336,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Normale',
+    drains: false,
   },
   {
     name: 'Mimic',
@@ -329,6 +350,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 100,
     huntSpeed: 'Variable',
+    drains: true,
   },
   {
     name: 'Moroi',
@@ -344,6 +366,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 50,
     huntSpeed: 'Variable',
+    drains: true,
   },
   {
     name: 'Deogen',
@@ -359,6 +382,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 40,
     huntSpeed: 'Variable',
+    drains: false,
   },
   {
     name: 'Thayé',
@@ -372,6 +396,7 @@ export const entities: Entity[] = [
     ],
     healthBeforeHunt: 75,
     huntSpeed: 'Variable',
+    drains: false,
   },
 ] as const;
 

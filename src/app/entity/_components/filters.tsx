@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
+import { useDrains } from '@/hooks/use-drains';
 import { useHuntSpeed } from '@/hooks/use-speed';
 import { huntSpeeds } from '@/lib/game-data';
 import { $health } from '@/stores/health';
@@ -14,6 +15,7 @@ export const Filters = () => {
   );
 
   const { selectedHuntSpeeds, toggleHuntSpeed } = useHuntSpeed();
+  const { toggleDrains, drains } = useDrains();
 
   return (
     <div className='flex gap-4  min-h-0 h-max'>
@@ -51,6 +53,19 @@ export const Filters = () => {
               </Button>
             ))}
           </div>
+        </div>
+        <div className='bg-card border rounded-xl p-4 flex items-center  w-fit h-fit  gap-4'>
+          <CardTitle>Drain de santé mentale</CardTitle>
+          <Button
+            variant={drains == true
+              ? 'primary'
+              : drains == false
+              ? 'destructive'
+              : 'default'}
+            onClick={toggleDrains}
+          >
+            Actif
+          </Button>
         </div>
       </div>
     </div>

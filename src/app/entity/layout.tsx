@@ -7,10 +7,12 @@ import { ProofCard } from './_components/proofs-card';
 import { useHuntSpeed } from '@/hooks/use-speed';
 import { useAtom } from 'jotai';
 import { $health } from '@/stores/health';
+import { useDrains } from '@/hooks/use-drains';
 
 export const EntityLayout = () => {
   const { bannedProofs, selectedProofs } = useProofs();
   const [health] = useAtom($health);
+  const { drains } = useDrains();
   const { selectedHuntSpeeds } = useHuntSpeed();
 
   const sortedEntities: {
@@ -26,23 +28,34 @@ export const EntityLayout = () => {
       sortedEntities.impossible.push(e);
       continue;
     }
+
+    if (
+      e.name == 'Mimic' &&
+      ((selectedProofs.includes('Orbe fantomatique') &&
+        !selectedProofs.includes('D.O.T.S.')) || drains && e.drains)
+    ) {
+      sortedEntities.possible.push(e);
+      continue;
+    }
     if (
       selectedHuntSpeeds.length > 0 && !selectedHuntSpeeds.includes(e.huntSpeed)
     ) {
       sortedEntities.impossible.push(e);
       continue;
     }
-    if (bannedProofs.some((p) => e.proofs.includes(p))) {
-      sortedEntities.impossible.push(e);
-      continue;
+
+    if (drains != null) {
+      if (e.drains === drains) {
+        sortedEntities.possible.push(e);
+        continue;
+      } else {
+        sortedEntities.impossible.push(e);
+        continue;
+      }
     }
 
-    if (
-      e.name == 'Mimic' &&
-      selectedProofs.includes('Orbe fantomatique') &&
-      !selectedProofs.includes('D.O.T.S.')
-    ) {
-      sortedEntities.possible.push(e);
+    if (bannedProofs.some((p) => e.proofs.includes(p))) {
+      sortedEntities.impossible.push(e);
       continue;
     }
 
@@ -50,7 +63,6 @@ export const EntityLayout = () => {
       sortedEntities.impossible.push(e);
       continue;
     }
-
     sortedEntities.possible.push(e);
   }
   return (
