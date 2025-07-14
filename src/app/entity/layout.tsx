@@ -3,12 +3,15 @@ import { entities, type Entity } from '@/lib/game-data';
 import { Outlet } from 'react-router';
 import { Filters } from './_components/filters';
 import { useProofs } from '@/hooks/use-proofs';
-import { useQueryState } from '@/hooks/use-search-params-state';
+import { ProofCard } from './_components/proofs-card';
+import { useHuntSpeed } from '@/hooks/use-speed';
+import { useAtom } from 'jotai';
+import { $health } from '@/stores/health';
 
 export const EntityLayout = () => {
   const { bannedProofs, selectedProofs } = useProofs();
-  const [health] = useQueryState({ key: 'health' });
-  const [huntSpeeds] = useQueryState({ key: 'huntspeeds' });
+  const [health] = useAtom($health);
+  const { selectedHuntSpeeds } = useHuntSpeed();
 
   const sortedEntities: {
     possible: Entity[];
@@ -19,11 +22,13 @@ export const EntityLayout = () => {
   };
 
   for (const e of entities) {
-    if (Number(health[0]) > e.healthBeforeHunt) {
+    if (health > e.healthBeforeHunt) {
       sortedEntities.impossible.push(e);
       continue;
     }
-    if (huntSpeeds.length > 0 && !huntSpeeds.includes(e.huntSpeed)) {
+    if (
+      selectedHuntSpeeds.length > 0 && !selectedHuntSpeeds.includes(e.huntSpeed)
+    ) {
       sortedEntities.impossible.push(e);
       continue;
     }
@@ -49,10 +54,11 @@ export const EntityLayout = () => {
     sortedEntities.possible.push(e);
   }
   return (
-    <div className='h-full bg-background dark px-4 pb-0 gap-3 flex flex-col w-full min-w-0 '>
+    <div className='h-full bg-background dark px-4 pb-0 gap-4 flex flex-col w-full min-w-0 '>
       <Filters />
-      <div className='grid grid-cols-[minmax(0,1fr)_auto]  h-full w-full relative max-h-full overflow-hidden min-h-0'>
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal mt-1 py-2'>
+      <div className='grid grid-cols-[auto_minmax(0,1fr)_auto] gap-4  flex-1 w-full relative max-h-full overflow-hidden min-h-0'>
+        <ProofCard />
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 auto-rows-min h-full overflow-auto scrollbar-minimal '>
           {sortedEntities.possible.map((e, i) => (
             <EntityCard
               key={i}

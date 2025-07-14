@@ -1,27 +1,40 @@
 import type { Proof } from '@/lib/game-data';
-import { useSearchParams } from 'react-router';
+import { $proofs } from '@/stores/proofs';
+import { useAtom } from 'jotai';
 
 export const useProofs = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [proofs, setProofs] = useAtom($proofs);
 
-  const urlProofs = Array.from(searchParams.entries()) as [
-    Proof,
-    'true' | 'false',
-  ][];
+  const toggleProof = (proof: Proof) => {
+    if (proofs.selected.includes(proof)) {
+      setProofs((prev) => ({
+        banned: [...prev.banned, proof],
+        selected: prev.selected.filter((p) => p == proof),
+      }));
+    } else if (proofs.banned.includes(proof)) {
+      setProofs((prev) => ({
+        ...prev,
+        banned: prev.banned.filter((p) => p == proof),
+      }));
+    } else {
+      setProofs((prev) => ({
+        ...prev,
+        selected: [...prev.selected, proof],
+      }));
+    }
+  };
+
+  const resetProofs = () => {
+    setProofs({
+      selected: [],
+      banned: [],
+    });
+  };
 
   return {
-    bannedProofs: urlProofs.filter(([_, v]) => v == 'false').map(([p, _]) => p),
-    selectedProofs: urlProofs.filter(([_, v]) => v == 'true').map(([p, _]) =>
-      p
-    ),
-    toggleProof: (proof: string) => {
-      setSearchParams((params) => {
-        const p = params.get(proof);
-        if (p == 'true') params.set(proof, 'false');
-        else if (p == 'false') params.delete(proof);
-        else params.set(proof, 'true');
-        return params;
-      });
-    },
+    bannedProofs: proofs.banned,
+    selectedProofs: proofs.selected,
+    toggleProof,
+    resetProofs,
   };
 };

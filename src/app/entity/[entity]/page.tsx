@@ -34,7 +34,7 @@ export const EntityPage = () => {
   }
 
   return (
-    <Card className='w-[450px] max-h-full mt-1 ml-6 right-0 top-0  grid grid-rows-[auto_minmax(0,1fr)] min-h-0 h-fit px-2 py-6 relative'>
+    <Card className='w-[450px] max-h-full mt-1  right-0 top-0  grid grid-rows-[auto_minmax(0,1fr)] min-h-0 h-fit px-2 py-6 relative'>
       <Button
         className='absolute top-2 right-2'
         size='icon'

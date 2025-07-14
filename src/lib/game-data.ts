@@ -13,7 +13,7 @@ export const huntSpeeds = [
   'Normale',
   'Variable',
 ] as const;
-type HuntSpeed = typeof huntSpeeds[number];
+export type HuntSpeed = typeof huntSpeeds[number];
 
 export type Entity = {
   name: string;
